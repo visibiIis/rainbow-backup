@@ -24,7 +24,7 @@ function get_courses_slides(array $args = []) {
             <div class="module-desc"><?php the_field('module_description'); ?></div>
             <a href="<?php the_permalink(); ?>" class="module-more">Подробнее</a>
             <div class="module-group">      
-              <div class="group-age"><?php the_field('module_age'); ?> лет</div>
+              <a href="#"><div class="group-age"><?php the_field('module_age'); ?> лет</div></a>
               <div class="group-flag <?= is_favorite(get_the_ID()) ? 'module-added' : 'module-add' ?> " id="<?php echo get_the_ID() ?>" ></div>
             </div>
           </div>
@@ -54,7 +54,7 @@ if( $query->have_posts() ){
         <div class="module-desc"><?php the_field('module_description') ?></div>
         <a href="<?php the_permalink() ?>" class="module-more">Подробнее</a>
         <div class="module-group">      
-          <div class="group-age"><?php the_field('module_age') ?> лет </div>
+          <a href="#"><div class="group-age"><?php the_field('module_age') ?> лет</div></a>
           <div class="group-flag" id="<?php echo get_the_ID() ?>"></div>
         </div>
       </div>

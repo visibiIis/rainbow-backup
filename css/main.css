@@ -1636,7 +1636,15 @@ padding-bottom: 1.4%;
     background: black;   
 }
 
-.news-and-blog h3:after, 
+.news-and-blog h3:after {
+    content: '';
+    display: block;
+    width: 5.20833333333vw;
+    height: 1px;
+    margin: .78125vw auto 0;
+    background: black;   
+}
+
 .reviews h3:after,
 .courses-content h2:after,
 .about-course h3:after  {
@@ -1853,6 +1861,10 @@ height: 9.4791666vw;
     align-items: center;
 }
 
+.module-group > a {
+    text-decoration: none;
+}
+
 .modules {
   overflow: hidden;
 }
@@ -1869,7 +1881,6 @@ height: 9.4791666vw;
 
     /*padding: 45px 60px 40px;*/
     padding: 2.34375vw 3.125vw 2.08333vw;
-    box-shadow: 0 0 19.6px 0.4px rgba(0, 0, 0, 0.08);
     background: #fff;
 
   opacity: .4;
@@ -1877,7 +1888,15 @@ height: 9.4791666vw;
   height: 21.875vw;
   box-sizing: border-box;
   position: relative;
+  border: 2px solid #f8f7f8;
 }
+
+.modules-slider-slide:hover {
+    border-color: white;
+    box-shadow: 0 0 19.6px 0.4px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
 .modules-slider .slick-current + .slick-active,
 .modules-slider .slick-current + .slick-active + .slick-active  {
 /*background:green;*/
@@ -2097,6 +2116,7 @@ color: black;
 font-size: 1.19791666vw;
 /*font-weight: 300;*/
 line-height: 1;
+cursor: pointer;
 }
 .group-flag {
   /*width: 25px;*/
@@ -2109,6 +2129,7 @@ line-height: 1;
 }
 .group-flag:hover, .group-flag:focus {
   background-image: url(../resources/img/main-page/blueFlag.svg);
+  cursor: pointer;
 }
 
 
@@ -2266,30 +2287,29 @@ display: none;
     /*display: flex;*/
  
         background-color: #f5f7f9;
-        padding-top: 3.125vw;
-        padding-bottom: 3.3854166vw;
+        padding-top: 3.54166666667vw;
+        padding-bottom: 3.48958333333vw;
   }
 
 
  .news-and-blog  h3  {
     /*width: 299px;*/
-/*height: 26px;*/
-color: #070707;
-/*font-family: FuturaPT;*/
-/*font-size: 36px;*/
-font-size: 1.875vw;
-/*font-weight: 300;*/
-/*line-height: 20px;*/
-text-transform: uppercase;
-text-align: center;
-margin: 0;
-/*margin: 0 0 2.5vw;*/
+    /*height: 26px;*/
+    color: #070707;
+    /*font-family: FuturaPT;*/
+    /*font-size: 36px;*/
+    font-size: 1.875vw;
+    /*font-weight: 300;*/
+    line-height: 1.45833333333vw;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
   }
   .news-and-blog-articles {
     display: flex;
     width: 84.27083333vw;
     height: auto;
-    margin: 1.666vw auto 0;
+    margin: 3.48958333333vw auto 0;
     justify-content: flex-start;
     flex-wrap: wrap;
   }
@@ -2302,12 +2322,6 @@ margin: 0;
     margin-top: 1.66666666667vw;
   }
 
-  .news-and-blog-article{
-    width: 19.791666vw;
-    box-shadow: 0 0 15.5px 0.5px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    position: relative;
-  }
   .news-and-blog-article img {
   	position: absolute;
   	top: 50%;
@@ -2415,6 +2429,7 @@ border-bottom: 1px dashed #5891dd;
 text-decoration: none;
 /*line-height: 18px;*/
 line-height: 1.125;
+cursor: pointer;
 }
 
 
@@ -2716,7 +2731,9 @@ font-size: 1.25vw;
 /*line-height: 26px;*/
 line-height: 1.08333;
 margin: 0;
+text-shadow: 0px 0px .41666666666vw rgba( 20, 19, 33, .08 );
 }
+
 .school-relevance-desc p:last-of-type {
   /*margin-top: 30px;*/
   margin: 1.5625vw 0;
@@ -2730,6 +2747,7 @@ margin: 0;
 line-height: 1.107143;
 text-transform: uppercase;
 text-align: center;
+text-shadow: 0px 0px .41666666666vw rgba( 20, 19, 33, .08 );
 }
 
 
@@ -2758,6 +2776,7 @@ text-align: center;
   padding-bottom: 2.96875vw;
   /*min-height: 609px;*/
   min-height: 31.71875vw;
+  background: white;
 }
 
 .callback-form [type="submit"] {
@@ -3982,8 +4001,34 @@ margin-top: .78125vw;
 }
 .news-and-blog-article {
     /*height: 705px;*/
+    width: 19.791666vw;
     height: 36.71875vw;
+    box-shadow: 0 0 .83333333333vw .15625vw rgba(0, 0, 0, .08);
+    background: #fff;
+    position: relative;
 }
+
+.news-and-blog-article:hover {
+    box-shadow: 0px 0px 1.97916666667vw .46875vw rgba(0, 0, 0, .08);
+}
+
+.news-and-blog-article:hover a:first-child:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .29); 
+}
+
+.news-and-blog-article:hover h4 {
+    color: #5891dd;
+}
+
 .category-article {
     position: absolute;
     bottom: 1.3909224vw;
