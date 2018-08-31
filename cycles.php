@@ -53,9 +53,9 @@ if( $query->have_posts() ){
         </div>
         <div class="module-desc"><?php the_field('module_description') ?></div>
         <a href="<?php the_permalink() ?>" class="module-more">Подробнее</a>
-        <div class="module-group">      
+        <div class="module-group">
           <a href="#"><div class="group-age"><?php the_field('module_age') ?> лет</div></a>
-          <div class="group-flag" id="<?php echo get_the_ID() ?>"></div>
+          <div class="group-flag <?= is_favorite(get_the_ID()) ? 'module-added' : 'module-add' ?> " id="<?php echo get_the_ID() ?>" ></div>
         </div>
       </div>
 <?php }
@@ -116,6 +116,45 @@ function get_news(array $args = []) {
       var current_page = <?php echo (get_query_var('paged')) ? get_query_var('paged') : 1; ?>;
       var max_pages = '<?php echo $news_and_blog_posts->max_num_pages; ?>';
     </script>
+
+    <script>
+        jQuery(function($){
+              $('.add-article-in-favorite').click(function() {
+                $(this).removeClass('add-article-in-favorite').addClass('article-in-favorite').addClass('curr');
+                
+                $.ajax({
+                  url: '<?php echo admin_url("admin-ajax.php") ?>',
+                  type: 'POST',
+                  data: {
+                    action: 'add_to_fav',
+                    post_id: $('.curr').attr('id')
+                  },
+                  success: function( data ) {
+                    console.log(data);
+                  }
+                });
+                $(this).removeClass('curr');
+              });
+          });
+         jQuery(function($){
+                $('.article-in-favorite').click(function() {
+                  $(this).removeClass('article-in-favorite').addClass('add-article-in-favorite').addClass('curr');
+                  $.ajax({
+                    url: '<?php echo admin_url("admin-ajax.php") ?>',
+                    type: 'POST',
+                    data: {
+                      action: 'del_from_fav',
+                      post_id: $('.curr').attr('id')
+                    },
+                    success: function( data ) {
+                      console.log(data);
+                    }
+                  });
+                  $(this).removeClass('curr');
+                });
+        });
+    </script>
+
   <?php
 }
 
