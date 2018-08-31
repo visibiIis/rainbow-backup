@@ -1514,8 +1514,28 @@ padding-bottom: 1.4%;
     opacity: 1;
 }
 
+.teacher-slider .slick-dots li button:before {
+    /*font-size: 18px;*/
+    /*color: #5891dd;*/
+    width: .83333333333vw;
+    height: .83333333333vw;
+    -webkit-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+    color: transparent;
+        border-radius: 50%;
+    /* border: 1px solid green; */
+    -webkit-box-shadow: 0 0 0 1px black;
+            box-shadow: 0 0 0 1px black;
+    opacity: 1;
+}
 
-.teacher-slider .slick-dots li button:before,
+.teachers .slick-dots li {
+    width: .83333333333vw;
+    height: .83333333333vw;
+    margin: 0 .625vw;   
+}
+
 .reviews-slider .slick-dots li button:before,
 .courses-page-slider .slick-dots li button:before {
     /*font-size: 18px;*/
@@ -1572,10 +1592,9 @@ padding-bottom: 1.4%;
 }
 
 .courses-page-slider .slick-dots li,
-.teacher-slider .slick-dots li,
 .reviews-slider .slick-dots li  {margin:0 12px;}
 .teacher-slider .slick-dots {
-    bottom: -3.125vw;
+    bottom: -3.75vw;
 }
 
 .main-photoslider .slick-dots li {
@@ -1590,26 +1609,33 @@ padding-bottom: 1.4%;
 
  .teachers {
   background-color: #f5f7f9;
-  padding-top: 3.125vw;
-  padding-bottom: 6.5104166vw;
+  padding-top: 3.38541666667vw;
+  padding-bottom: 6.40625vw;
  } 
 .teachers h3, .reviews h3 , .about-course h3 {
     /*width: 425px;*/
     /*height: 33px;*/
     color: #070707;
-    /*font-family: FuturaPT;*/
-    /*font-size: 36px;*/
+    font-family: Conv_FuturaPTHeavy;
     font-size: 1.875vw;
     margin: 0;
     padding: 0;
     text-align: center;
     /*font-weight: 300;*/
     font-weight: bold;
-    line-height: 1.111vw;
+    line-height: 1.45833333333vw;
     text-transform: uppercase;
   }
 
-.teachers h3:after, 
+.teachers h3:after {
+    content: '';
+    display: block;
+    width: 5.20833333333vw;
+    height: 1px;
+    margin: .78125vw auto 0;
+    background: black;   
+}
+
 .news-and-blog h3:after, 
 .reviews h3:after,
 .courses-content h2:after,
@@ -1622,9 +1648,15 @@ padding-bottom: 1.4%;
   margin: .9375vw auto 0;
 }
 
+.teachers .slick-dots li button {
+    width: .83333333333vw;
+    height: .83333333333vw;
+    padding: 0;
+}
+
   .teacher-slider.slick-dotted.slick-slider {
     width: 62.5vw;
-    margin: 2.86458333vw auto 0;
+    margin: 3.22916666667vw auto 0;
   }
   .teacher-slider-slide > div {
     position: relative;
