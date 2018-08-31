@@ -116,7 +116,7 @@ if (!function_exists('add_scripts')) { // если ф-я уже есть в до
 	function add_scripts() { // добавление скриптов
 	    if(is_admin()) return false; // если мы в админке - ничего не делаем
 	    wp_deregister_script('jquery'); // выключаем стандартный jquery
-	    wp_enqueue_script('jq', get_template_directory_uri().'/libs/jquery/jquery-3.2.1.min.js','','',true);
+	    wp_enqueue_script('jq', 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js','','',true);
 	    wp_enqueue_script('parallax', get_template_directory_uri().'/libs/parallax.js-1.5.0/parallax.min.js','','',true); // и скрипты шаблона
 	    wp_enqueue_script('slick', get_template_directory_uri().'/libs/slick-1.8.0/slick/slick.min.js','','',true); // и скрипты шаблона
 	    wp_enqueue_script('jqmi', get_template_directory_uri().'/libs/maskedinput-1.4.1/jquery.maskedinput.js','','',true); // и скрипты шаблона

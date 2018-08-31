@@ -1346,12 +1346,12 @@
   </div>
   <?php } wp_reset_postdata() ?>
 
-<script src="<?php bloginfo('template_directory'); ?>/libs/jquery/jquery-3.2.1.min.js"></script>
+<!-- <script src="<?php bloginfo('template_directory'); ?>/libs/jquery/jquery-3.2.1.min.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/libs/slick-1.8.0/slick/slick.min.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/libs/parallax.js-1.5.0/parallax.min.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/libs/maskedinput-1.4.1/jquery.maskedinput.js"></script>
 
-<script src="<?php bloginfo('template_directory'); ?>/js/init.js"></script>
+<script src="<?php bloginfo('template_directory'); ?>/js/init.js"></script> -->
 
 <script src="<?php bloginfo('template_directory'); ?>/libs/forAnimation/wow.min.js"></script>
 <script>
