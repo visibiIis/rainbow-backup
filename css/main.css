@@ -1594,7 +1594,7 @@ padding-bottom: 1.4%;
 .courses-page-slider .slick-dots li,
 .reviews-slider .slick-dots li  {margin:0 12px;}
 .teacher-slider .slick-dots {
-    bottom: -3.75vw;
+    bottom: -3.22916666667vw;
 }
 
 .main-photoslider .slick-dots li {
@@ -1656,20 +1656,22 @@ padding-bottom: 1.4%;
 
   .teacher-slider.slick-dotted.slick-slider {
     width: 62.5vw;
-    margin: 3.22916666667vw auto 0;
+    margin: 2.70833333333vw auto 0;
   }
   .teacher-slider-slide > div {
     position: relative;
     width: 29.4270833vw;
-    box-shadow: 0 0 19.6px 0.4px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 0px 1.04166666667vw .10416666666vw rgb( 0, 0, 0, .08 );
     overflow: hidden;
   }
+
     .slick-slide.teacher-slider-slide {
       /*background: red;*/
       /*width: 62.5vw;*/
       height: 19.791666vw;
           display: flex;
           justify-content: space-between;
+          padding: .52083333333vw;
     }
     .teacher-photo {
       height: 100%;
