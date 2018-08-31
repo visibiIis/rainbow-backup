@@ -23,19 +23,22 @@ get_header(); // подключаем header.php ?>
 
   <div class="module-search-container">
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-  	
+  	<?php if (in_category('blog')): ?>
+      
+    
     <div class="module-search-result">
       <div class="module-search-result-text">
         <a href="<?php the_permalink() ?>"><span><?php the_title(); ?></span></a>
         <span><?php the_content(''); ?></span>
       </div>
-      <span><?= get_the_date('d m Y') ?></span>
+      <span><?= get_the_date('j F Y') ?></span>
     </div>
+    <?php endif;?>
     <?php endwhile; else: ?>
     <p>Поиск не дал результатов.</p>
-    <?php endif;?>
-    
+    <?php endif ?>
   </div>
+
 
   <div class="results-pagination">
     <span class="results-pagination-prev">

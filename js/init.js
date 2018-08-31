@@ -437,6 +437,7 @@ jQuery('.mobile-nav-menu-close').click(function() {
         if (window.innerWidth <= 1024) {}
         jQuery('.calendar-trigger').hide(10);
         jQuery('.search-cont').fadeIn(800);
+        jQuery('.search-cont').find('.search-form > input').first().focus();
     });
 
 
@@ -447,8 +448,7 @@ jQuery('.mobile-nav-menu-close').click(function() {
         jQuery('.calendar-trigger').show(400);
         jQuery('.search-cont').fadeOut(400);
         return false;
-   }
-    );
+   });
 
 
 
@@ -1135,7 +1135,12 @@ $(document).keyup(function(e){
 
     jQuery('.calendar-win:visible').fadeOut(800);
 
-    jQuery('.search-cont:visible').fadeOut(800);
+    if(jQuery('.search-close').length > 0) {
+        jQuery('.search-widget').addClass('search-trigger');
+        jQuery('.calendar-trigger').show(400);
+        jQuery('.search-cont').fadeOut(400);
+        return false;
+   };
   }
 });
 

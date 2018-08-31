@@ -1199,14 +1199,7 @@ float: right;
 #remindPass span:hover {
     border-color: transparent;
 }
-.closeCross {
-    position: absolute;
-    right: 22px;
-    top: 22px;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-}
+
 .user-login-close.closeCross {
     top: 3.125vw;
     right:  4.6875vw;
