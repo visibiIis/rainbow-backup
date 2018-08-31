@@ -1499,7 +1499,22 @@ padding-bottom: 1.4%;
             box-shadow: 0 0 0 1.5px #5891dd;
 }
 
-.main-photoslider .slick-dots li button:before,
+
+.main-photoslider .slick-dots li button:before {
+    width: .83333333333vw;
+    height: .83333333333vw;
+    -webkit-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+    color: transparent;
+    border-radius: 50%;
+    /* border: 1px solid green; */
+    -webkit-box-shadow: 0 0 0 1px black;
+            box-shadow: 0 0 0 1px black;
+    opacity: 1;
+}
+
+
 .teacher-slider .slick-dots li button:before,
 .reviews-slider .slick-dots li button:before,
 .courses-page-slider .slick-dots li button:before {
@@ -1518,6 +1533,12 @@ padding-bottom: 1.4%;
     opacity: 1;
 }
 
+.main-photoslider .slick-dots li button {
+    width: .83333333333vw;
+    height: .83333333333vw;
+    padding: 0;
+}
+
 .main-photoslider .slick-dots li button:hover:before,
  .main-photoslider .slick-dots li button:focus:before,
  .reviews-slider .slick-dots li button:focus:before,
@@ -1530,10 +1551,15 @@ padding-bottom: 1.4%;
             box-shadow: 0 0 0 1.5px #5891dd;
     background: #5891dd;
 }
-.main-photoslider .slick-dots,
+
 .courses-page-slider .slick-dots {
     bottom: 2.34375vw;
 }
+
+.main-photoslider .slick-dots {
+    bottom: 2.29166666667vw;    
+}
+
 .reviews-slider.slick-dotted.slick-slider {
     /*margin-bottom: 90px;*/
     margin-bottom: 4.6875vw;
@@ -1544,13 +1570,20 @@ padding-bottom: 1.4%;
     /*bottom: -60px*/
     bottom: -3.125vw;
 }
-.main-photoslider .slick-dots li,
+
 .courses-page-slider .slick-dots li,
 .teacher-slider .slick-dots li,
 .reviews-slider .slick-dots li  {margin:0 12px;}
 .teacher-slider .slick-dots {
     bottom: -3.125vw;
 }
+
+.main-photoslider .slick-dots li {
+    width: .83333333333vw;
+    height: .83333333333vw;
+    margin: 0 .625vw;
+}
+
 .main-photoslider.slick-dotted.slick-slider,
  .courses-page-slider.slick-dotted.slick-slider {margin:0;}
 
