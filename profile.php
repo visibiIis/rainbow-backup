@@ -314,7 +314,7 @@ get_header(); // подключаем header.php ?>
 
 	        <div class="profile-news-and-blog-article">
 	          <a class="article-link" href="#">
-	            <img src="../resources/img/main-page/news-and-blog/kids_training.jpg" alt="">
+	            <?php the_post_thumbnail('full'); ?>
 	          </a>
 	          <div>
 	            <div class="article-date-bar">
