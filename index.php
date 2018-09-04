@@ -208,6 +208,5 @@ get_header(); // подключаем header.php ?>
       <?= do_shortcode('[contact-form-7 id="244" title="Форма обратной связи 1-ый тип"]'); ?>
     </form>
   </section>
-  <script>
   
 <?php get_footer(); // подключаем footer.php ?>
