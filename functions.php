@@ -306,7 +306,7 @@ function true_load_posts(){
  
 	$args = unserialize( stripslashes( $_POST['query'] ) );
 	$args['paged'] = $_POST['page'] + 1; // следующая страница
-	//$args['posts_per_page'] = 4;
+	$args['posts_per_page'] = 4;
 	$query = new WP_Query($args);
 	switch($args['category_name']) {
 		case 'blog':

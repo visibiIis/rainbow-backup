@@ -34,13 +34,14 @@ function get_courses_slides(array $args = []) {
       } 
 }
 
-function get_courses(array $args = []) {
+function get_courses(array $args = [], $filter = '') {
 	$args['category_name'] = 'module';
 	$query = new WP_Query($args);
 if( $query->have_posts() ){
 	while( $query->have_posts() ){ $query->the_post();
 	?>
-
+  <?php if ($filter == get_field('module_age') or $filter == ''): ?>
+      
       <div class="course">
         <div class="modules-date">
           <span class="modules-date-day"><?= get_array(get_field('module_date'), 'date')[0] ?></span>
@@ -58,6 +59,8 @@ if( $query->have_posts() ){
           <div class="group-flag <?= is_favorite(get_the_ID()) ? 'module-added' : 'module-add' ?> " id="<?php echo get_the_ID() ?>" ></div>
         </div>
       </div>
+    
+  <?php endif ?>
 <?php }
 wp_reset_postdata();
 }

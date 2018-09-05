@@ -5,6 +5,11 @@
  * @subpackage your-clean-template-3
  * Template Name: Курсы
  */
+
+if ($_GET['cat']) { 
+	$filter = $_GET['cat']; 
+}
+
 get_header(); // подключаем header.php ?>
 
   <section class="courses-page-slider">
@@ -44,16 +49,15 @@ get_header(); // подключаем header.php ?>
     <nav class="courses-nav">
       <span>Выберите параметр для быстрого поиска:</span>
       <ul>
-        <li><a href="#">скоро старт</a></li>
-        <li><a href="#">7-9 лет</a></li>
-        <li><a href="#">10-12 лет</a></li>
-        <li><a href="#">13-15 лет</a></li>
-        <li><a href="#">16-17 лет</a></li>
+        <li><a href="?cat=soon">скоро старт</a></li>
+        <li><a href="?cat=7-9">7-9 лет</a></li>
+        <li><a href="?cat=10-13">10-13 лет</a></li>
+        <li><a href="?cat=14-17">14-17 лет</a></li>
       </ul>
     </nav>
     <div class="courses-page-courses-cont">
 <?php 
-  get_courses(['posts_per_page' => 2]);
+  get_courses(['posts_per_page' => 4], $filter);
 ?>
 <div id="posts"></div>
 
@@ -76,7 +80,7 @@ get_header(); // подключаем header.php ?>
         
       ?>
 
-      <?php if ($posts_number > 2 ) : ?>
+      <?php if ($posts_number > 4 ) : ?>
         <div id="true_loadmore" class="blog-menu-more-button">
           <span>Больше статей</span>
           <div class="unactive"></div>
