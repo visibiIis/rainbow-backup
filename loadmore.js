@@ -17,8 +17,10 @@ jQuery(function($)
 				url:ajaxurl, // обработчик
 				data:data, // данные
 				type:'POST', // тип запроса
-				success:function(data){
+				success:function(data){			
+				console.log(data);
 					if( data ) {
+					
 						$('#true_loadmore').html('<span>Больше статей</span><div></div>'); // вставляем новые посты\
 						$('#true_loadmore').find('div').addClass('unactive');
 						$('#posts').before(data);

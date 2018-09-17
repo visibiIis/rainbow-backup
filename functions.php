@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Функции шаблона (function.php)
  * @package WordPress
@@ -116,14 +116,15 @@ if (!function_exists('add_scripts')) { // если ф-я уже есть в до
 	function add_scripts() { // добавление скриптов
 	    if(is_admin()) return false; // если мы в админке - ничего не делаем
 	    wp_deregister_script('jquery'); // выключаем стандартный jquery
-	    wp_enqueue_script('jq', get_template_directory_uri() . '/libs/jquery/jquery-3.3.1.min.js','','',true);
+	    wp_enqueue_script('jq', get_template_directory_uri().'/libs/jquery/jquery-3.2.1.min.js','','',true);
 	    wp_enqueue_script('parallax', get_template_directory_uri().'/libs/parallax.js-1.5.0/parallax.min.js','','',true); // и скрипты шаблона
 	    wp_enqueue_script('slick', get_template_directory_uri().'/libs/slick-1.8.0/slick/slick.min.js','','',true); // и скрипты шаблона
 	    wp_enqueue_script('jqmi', get_template_directory_uri().'/libs/maskedinput-1.4.1/jquery.maskedinput.js','','',true); // и скрипты шаблона
 	    wp_enqueue_script('main', get_template_directory_uri().'/js/init.js','','',true); // и скрипты шаблона
-	    wp_enqueue_script('wow', get_template_directory_uri().'/libs/forAnimation/wow.min.js',['jq'],'',true); // и скрипты шаблона
-
+	    wp_enqueue_script('wow', get_template_directory_uri().'/libs/forAnimation/wow.min.js','','',true); // и скрипты шаблона
+			wp_localize_script( 'main', 'ajaxForm', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
+	
 }
 
 add_action('wp_print_styles', 'add_styles'); // приклеем ф-ю на добавление стилей в хедер
@@ -301,9 +302,8 @@ function true_loadmore_scripts() {
 }
  
 add_action( 'wp_enqueue_scripts', 'true_loadmore_scripts' );
-
 function true_load_posts(){
- 
+
 	$args = unserialize( stripslashes( $_POST['query'] ) );
 	$args['paged'] = $_POST['page'] + 1; // следующая страница
 	$args['posts_per_page'] = 4;
@@ -323,6 +323,8 @@ function true_load_posts(){
 	          <div class="article-date-bar">
 	            <span class="article-date"><?= get_the_date('j F Y'); ?></span> 
 	            <span class="article-reading-time">Читать <?= read_speed(get_the_content(), [' минута', ' минуты', ' минут']); ?></span>
+
+
 	          </div>
 	          <h4><?php the_title(); ?></h4>
 	          <div class="news-and-blog-article-desc">
@@ -360,7 +362,8 @@ function true_load_posts(){
 		    die();
 		break;
 		case 'module' :
-			if( $query->have_posts() ){
+		if( $query->have_posts() ){
+			
 			while( $query->have_posts() ){ $query->the_post();
 		?>
 
@@ -387,10 +390,7 @@ function true_load_posts(){
 		die();
 		break;
 	}
-	
-}
- 
- 
+} 
 add_action('wp_ajax_loadmore', 'true_load_posts');
 add_action('wp_ajax_nopriv_loadmore', 'true_load_posts');
 
@@ -509,21 +509,24 @@ function my_action_javascript() {
   ?>
   <script type="text/javascript" >
   jQuery(document).ready(function($) {
-    jQuery('.wpum-login-form form').submit(function(e){
+    jQuery('.wpum-login-form form').on('submit', function(e){
 		var myajax = "<?php echo admin_url( 'admin-ajax.php' );?>";
       var flag=true;
+			console.log(jQuery('.userLogin #user_login').val());
      // data = { action: 'login_action', log: jQuery('#user_login').val(), pwd: jQuery('#user_pass').val() };
+		 jQuery('.wpum-login-form input[type="text"], .wpum-login-form input[type="password"]').removeClass('invalidInput');
       jQuery.ajax({
         method: "POST",
         url: myajax,
-        data: { action: 'login_action', log: jQuery('#user_login').val(), pwd: jQuery('#user_pass').val() },
+        data: { action: 'login_action', log: jQuery('.userLogin #user_login').val(), pwd: jQuery('#user_pass').val() },
         async:false
       }).done(function(response){
         if(response == 'error'){
-          jQuery('.wpum-login-form').addClass('error-form');
+          jQuery('.wpum-login-form input[type="text"], .wpum-login-form input[type="password"]').addClass('invalidInput');
           flag = false;
-        }else{
+        }else{					
           flag = true;
+					//window.location.href = jQuery('.wpum-login-form').data('redirect');
         }
       })
       return flag;
@@ -536,6 +539,7 @@ add_action( 'wp_ajax_login_action', 'login_action_callback' );
 add_action( 'wp_ajax_nopriv_login_action', 'login_action_callback' );
 function login_action_callback(){
   $user = get_user_by( 'email', $_POST['log'] );
+	print_r($user);
   if ( $user && wp_check_password( $_POST['pwd'], $user->data->user_pass, $user->ID) && $user->roles[0] != 'administrator'){
   }else{
     echo 'error';
@@ -583,5 +587,218 @@ function register_action_callback(){
 		echo 'error';
 	}
   wp_die();
+}
+add_action('wp_footer', 'ch_password_javascript', 99);
+function ch_password_javascript(){
+?>
+<script>
+jQuery(document).ready(function() {
+    // Define admin-ajax for front-end usage
+
+    // Detect if button with a class "btn-change-pass" was clicked
+      jQuery('.btn-change-pass').off().click(function(e){
+        var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+        // Validate empty fields or mismatched passwords
+        if (jQuery('.password-reset-form .password0').val() === '') {
+            jQuery('.password0').addClass('invalidInput');
+        } else if (jQuery('.password-reset-form .password1').val() === '') {
+            jQuery('.password1').addClass('invalidInput');
+        } else if (jQuery('.password-reset-form .password2').val() === '') {
+            jQuery('.password2').addClass('invalidInput');
+        } else if (jQuery('.password-reset-form .password2').val() !== jQuery('.password-reset-form .password1').val()) {
+            jQuery(".change-password-messages").html('<p class = "bg-danger">Passwords do not match</p>');
+        } else {
+            // if everything is validated, we're ready to send an AJAX request
+            jQuery('.password1, .password2').removeClass('invalidInput');
+            // Defining your own loading gif image
+            jQuery(this).text('<?php echo TEXT_WAIT; ?>');
+
+            // Define the ajax arguments
+            var data = {
+                'action': 'cvf_ngp_change_password',
+                'cvf_action': 'change_password',
+                'new_password': jQuery('.password-reset-form .password2').val(),
+                'old_password': jQuery('.password-reset-form .password0').val()
+            };
+
+            jQuery.post(ajaxurl, data, function(response) {
+                // Detect the recieved AJAX response, then do the necessary logics you need for each specific response
+                if(response === 'success') {
+                    jQuery(".change-password-messages").html('<p class = "bg-success">Password Successfully Changed </p>');
+                    setTimeout(function(){
+                      jQuery('.closeCross').trigger('click');
+                       jQuery(".change-password-messages").html('');
+                       jQuery('.btn-change-pass').text('<?php echo TEXT_SAVE; ?>');
+                       jQuery('.password0, .password1, .password2').val('');
+                    },1000)
+                } else if (response === 'error') {
+                    jQuery(".password-reset-input input").addClass('error');
+                    jQuery('.btn-change-pass').text('<?php echo TEXT_SAVE; ?>');
+                }
+            });
+        }
+				return false;
+    });
+});
+</script>
+<?php
+}
+add_action('wp_ajax_cvf_ngp_change_password', 'cvf_ngp_change_password');
+add_action('wp_ajax_nopriv_cvf_ngp_change_password', 'cvf_ngp_change_password');
+
+function cvf_ngp_change_password() {
+
+    global $current_user;
+//print_r($current_user);die();
+    if(isset($_POST['cvf_action']) && $_POST['cvf_action'] == 'change_password') {
+        $old_password = sanitize_text_field($_POST['old_password']);
+        if (wp_check_password( $old_password, $current_user->user_pass, $current_user->ID) ){
+        //Sanitize received password
+        $password = sanitize_text_field($_POST['new_password']);
+
+        // Define arguments that will be passed to the wp_update_user()
+        $userdata = array(
+            'ID'        =>  $current_user->ID,
+            'user_pass' =>  $password // Wordpress automatically applies the wp_hash_password() function to the user_pass field.
+        );
+        $user_id = wp_update_user($userdata);
+
+        // wp_update_user() will return the user_id on success and an array of error messages on failure.
+        // so bellow we are going to check if the returned string is equal to the current user ID, if yes then we proceed updating the user meta field
+        if($user_id == $current_user->ID){
+            update_user_meta($current_user->ID, 'ngp_changepass_status', 1);
+            echo 'success';
+
+        } else {
+            echo 'error';
+        }
+        }else{
+            echo 'error';
+        }
+    }
+    // Always exit to avoid further execution
+    exit();
+}
+add_action('wp_footer', 'add_avatar_javascript', 99);
+function add_avatar_javascript(){
+?>
+<script>
+jQuery(document).ready(function() {    
+      jQuery('input[name="user_avatar"]').on('change', function(e){			
+         var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';    
+				  var data = new FormData();    
+					data.append('action', 'avatar_callback');
+					jQuery.each($('input[name="user_avatar"]')[0].files, function(key, value) {
+							data.append('avatar_callback', value);
+					});
+
+				 $.ajax({
+    		  url: ajaxurl,
+	          type: 'POST',
+	          data: data,
+	          cache: false,
+	          dataType: 'json',
+	          processData: false, // Don't process the files
+	          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+	          success: function(data, textStatus, jqXHR) {	
+	          }
+	});        
+				return false;
+    });
+});
+</script>
+<?php
+}
+add_action( 'wp_ajax_avatar_callback', 'avatar_callback' );
+add_action( 'wp_ajax_nopriv_avatar_callback', 'avatar_callback' );
+function avatar_callback(){
+		$upload_dir = wp_upload_dir();
+	  $upload_path = $upload_dir["basedir"]."/wp-user-manager-uploads";
+	  $upload_url = $upload_dir["baseurl"]."/wp-user-manager-uploads";
+	  if(!file_exists($upload_path)){
+			mkdir($upload_path);
+		}
+		
+		$data = isset( $_FILES ) ? $_FILES : array();
+		if(!empty($data)){
+		$fileName = $data["avatar_callback"]["name"];
+		$fileNameChanged = str_replace(" ", "_", $fileName);
+		$temp_name = $data["avatar_callback"]["tmp_name"];
+		$file_size = $data["avatar_callback"]["size"];
+		$fileError = $data["avatar_callback"]["error"];
+		$mb = 2 * 1024 * 1024;
+		$targetPath = $upload_path;
+		$response["filename"] = $fileName;
+		$response["file_size"] = $file_size;
+		if($fileError > 0){
+			$response["response"] = "ERROR";
+      $response["error"] = $fileErrors[ $fileError ];
+		} else {
+			if(file_exists($targetPath . "/" . $fileNameChanged)){		
+				$newName = explode('.', $fileNameChanged);
+				$fileNameChanged = $newName[0] . '_1.'.$newName[1];
+			} 
+				if($file_size <= $mb){
+			    	if( move_uploaded_file( $temp_name, $targetPath . "/" . $fileNameChanged ) ){
+			    		$response["response"] = "SUCCESS";
+			    		$response["url"] =  $upload_url . "/" . $fileNameChanged;
+			    		$file = pathinfo( $targetPath . "/" . $fileNameChanged );
+			    		
+			    		if( $file && isset( $file["extension"] ) ){
+							$type = $file["extension"];
+							if( $type == "jpeg" || $type == "jpg" || $type == "png" || $type == "gif" ) {
+								$type = "image/" . $type;
+							}
+			    			$response["type"] = $type;	
+			    		}			            		
+			    	} else {
+			    		$response["response"] = "ERROR";
+			    		$response["error"]= "Upload Failed.";
+			    	}		 
+							update_user_meta( get_current_user_id(), "current_user_avatar", $upload_url . "/" . $fileNameChanged );
+							update_user_meta( get_current_user_id(), '_current_user_avatar_path', $targetPath . "/" . $fileNameChanged);
+		       } else {
+		      	$response["response"] = "ERROR";
+		      	$response["error"]= "File is too large. Max file size is 2 MB.";
+		      }
+	   
+		}
+			echo json_encode( $response );
+		}	
+  wp_die();	
+}
+add_action('wp_footer', 'delete_avatar_javascript', 99);
+function delete_avatar_javascript(){
+?>
+<script>
+jQuery(document).ready(function() {    
+var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';  
+jQuery('body').on('click', '.closeImg',function(){
+	var data = {'action' : 'delete_avatar'};
+	$.ajax({
+    url: ajaxurl,
+	  type: 'POST',
+	  data: data,
+	  success: function(response) {	
+			if(response == 'success'){
+				jQuery('#blah').attr('src','');
+				jQuery('input[name="current_user_avatar"]').attr('value', '');
+				jQuery('.closeImg').remove();
+			}
+	  }
+	});	
+	return false;
+})
+});
+</script>
+<?php
+}
+add_action( 'wp_ajax_delete_avatar', 'delete_avatar' );
+add_action( 'wp_ajax_nopriv_delete_avatar', 'delete_avatar' );
+function delete_avatar(){
+	if(delete_user_meta(get_current_user_id(), "current_user_avatar") && delete_user_meta(get_current_user_id(), "_current_user_avatar_path")){
+		echo 'success';
+	}
+	wp_die();	
 }
 ?>

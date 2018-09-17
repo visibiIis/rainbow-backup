@@ -1302,15 +1302,6 @@ $('.module-search-result').mouseout(function() {
 if(!$('.login-remember span').length > 0){
 	$('#rememberme').after('<span></span>');
 }
-function deleteImg(){
-jQuery('.closeImg').on('click',function(){
-	jQuery('#blah').attr('src','');
-	jQuery('input[name="current_user_avatar"]').attr('value', '');
-	jQuery('.closeImg').remove();
-	return false;
-})
-}
-deleteImg();
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -1319,7 +1310,6 @@ function readURL(input) {
 						if(!jQuery('.wpum-uploaded-files label .closeImg').length > 0){
 							jQuery('<a class="closeImg" href="#"><span>Удалить аватарку</span></a>').appendTo('.wpum-uploaded-files label');
 						}
-						deleteImg();
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -1329,5 +1319,9 @@ jQuery("#user_avatar").change(function(){
 });
 jQuery('.wpum-uploaded-files label').click(function(){
 	readURL(jQuery(this).next().val());
-});			
+});		
+jQuery('.wpum-helper-links a').off().on('click', function(){
+	$('.user-cabinet-trigger').trigger('click');
+	return false;
+})	
 // конец //
