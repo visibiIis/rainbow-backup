@@ -1223,19 +1223,6 @@
         /*width: 275px;*/
         width: 35.80729166vw;
     }
-
-    .user-login-and-registr-form input[type="email"], .user-login-and-registr-form input[type="password"] {
-        /*height: 42px;*/
-        height: 5.46875vw;
-        /*border-radius: 21px;*/
-        border-radius: 2.734375vw;
-        /*font-size: 14px;*/
-        font-size: 1.82291666vw;
-        line-height: 5.46875vw;
-        /*padding: 0 22px;*/
-        padding: 0 2.8645833vw;
-    }
-
     .userLogin ::-webkit-input-placeholder {
         font-size: 1.82291666vw;
         line-height: 5.46875vw;

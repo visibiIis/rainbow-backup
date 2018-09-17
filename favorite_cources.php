@@ -37,7 +37,7 @@ get_header(); ?>
 <?php 
 $posts_id = array();
 $posts_id = get_favorite_posts('module');
-if(!empty($posts_id)){
+if(!empty(array_filter($posts_id))){
 //die();
   get_courses(['posts_per_page' => 4, 'post__in' => array_filter($posts_id)]);
 ?>

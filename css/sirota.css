@@ -746,17 +746,6 @@
 		line-height: 1.4;
 	}
 
-	.profile-menu-password {
-		position: absolute;
-		right: 30vw;
-		top: 23.9739583333vw;
-		height: 7.421875vw;
-		border-radius: 10vw;
-		font-size: 2.213541667vw;
-		width: 28.3854166667vw;
-		line-height: 7.421875vw;
-	}
-
 	.password-reset {
 		width: 82.03125vw;
 		height: 61.8489583333vw;
@@ -905,7 +894,7 @@
 
 	.courses-page-courses-cont .course {
 		width: 39.713541667vw;
-		height: 30.385416667vw;
+		height: auto;
 	}
 
 	.modules-date-day {
@@ -925,7 +914,6 @@
 	}
 
 	.module-desc {
-		height: 14.192708333vw;
 		font-size: 1.7vw;
 		line-height: 2.083333333vw;
 	}

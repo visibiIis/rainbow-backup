@@ -41,7 +41,7 @@ $posts_id = array();
 } */
 echo '<div class="news-and-blog"><div class="news-and-blog-articles">';
 $posts_id = get_favorite_posts('blog');
-if(!empty($posts_id)){
+if(!empty(array_filter($posts_id))){
 get_news(['posts_per_page' => 4, 'post__in' => array_filter($posts_id)]);
 echo '<div id="posts"></div>';
 $posts = get_posts( array(
